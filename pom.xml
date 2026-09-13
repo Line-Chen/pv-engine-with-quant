@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.cmb.pvengine</groupId>
+    <artifactId>pv-quant-sdk-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>pv-quant-sdk-demo</name>
+    <description>Spring 集成星耀 QUANT SDK 的可测试 Demo</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <quant.sdk.version>1.1.0-SNAPSHOT</quant.sdk.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- 本地 QUANT SDK 制品：当前仓库根目录 jar，尚未发布到可访问的 Maven 仓库 -->
+        <dependency>
+            <groupId>LV68.06</groupId>
+            <artifactId>pv-quant-sdk-api</artifactId>
+            <version>${quant.sdk.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/pv-quant-sdk-api-1.1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>LV68.06</groupId>
+            <artifactId>pv-quant-sdk-impl</artifactId>
+            <version>${quant.sdk.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/pv-quant-sdk-impl-1.1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+
+        <!-- SDK POM 中的显式运行时依赖，system scope 不会传递 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

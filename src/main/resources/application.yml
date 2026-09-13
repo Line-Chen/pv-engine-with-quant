@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  tomcat:
+    max-http-form-post-size: 2MB
+
+spring:
+  application:
+    name: pv-quant-sdk-demo
+  servlet:
+    multipart:
+      max-request-size: 2MB
+      max-file-size: 2MB
+
+quant:
+  sdk:
+    cmb-home: ${user.dir}/runtime/cmb-home
+    lock-timeout-ms: 30000
+    max-payload-bytes: 2097152
+
+logging:
+  level:
+    com.cmb.pvengine.integration: INFO
+    com.cmb.pvengine: INFO

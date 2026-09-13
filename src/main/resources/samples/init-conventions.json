@@ -1,0 +1,39 @@
+{
+  "Cash Deposit": [
+    {
+      "conventionName": "CNY-CASH-DEPOSIT",
+      "center": "BEJ",
+      "description": "Cash Deposit",
+      "attributes": {
+        "SettlementOffset": "1B",
+        "SettlementHolidays": "BEJ",
+        "Currency": "CNY",
+        "Notional": "10000000",
+        "AccrualBasis": "Act/365",
+        "PaymentBusinessDayConvention": "MF",
+        "PaymentHolidays": "BEJ",
+        "TermOverride": "",
+        "Type": "Cash Deposit"
+      }
+    }
+  ],
+  "Swap": [
+    {
+      "conventionName": "CNY-SWAP-QTR-MONEY",
+      "center": "BEJ",
+      "description": "Swap",
+      "attributes": {
+        "SettlementOffset": "1B",
+        "SettlementHolidays": "BEJ",
+        "Currency": "CNY",
+        "Notional": "10000000",
+        "LiborIndex": "CNY-SHIBOR-3M",
+        "AccrualPeriod": "3M",
+        "AccrualBasis": "Act/365F",
+        "PaymentBusinessDayConvention": "MF",
+        "PaymentHolidays": "BEJ",
+        "Type": "Swap"
+      }
+    }
+  ]
+}

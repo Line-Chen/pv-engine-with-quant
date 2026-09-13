@@ -1,0 +1,77 @@
+---
+description: Java 项目统一编码规则（基于 coding_agent_java_rules.md）
+alwaysApply: true
+---
+
+# Java 项目统一编码规则
+
+## 适用范围
+- 本规则对当前仓库所有任务生效（`alwaysApply: true`）。
+- 涉及 Java 代码时，必须遵守 `coding_agent_java_rules.md`，尤其是 56 条强制规则（`JAVA-M-*`），以及本仓库升格为强制的 `JAVA-S-030`。
+- 其余建议规则（`JAVA-S-*`，不含 `JAVA-S-030`）默认执行；若偏离，必须说明原因与补偿措施。
+
+## 执行优先级
+1. 强制规则（阻断）
+2. 安全与正确性
+3. 契约兼容性与可观测性
+4. 性能与可维护性
+5. 建议/推荐规则
+
+## 硬性执行要求
+- 禁止跳过任何强制规则（`JAVA-M-001` ~ `JAVA-M-056`，以及 `JAVA-S-030`）。
+- 涉及外部输入、日志、序列化、SQL、并发、事务、反射、文件路径时，必须优先做安全与边界校验。
+- 生产持久化访问统一使用 MyBatis/MyBatis-Plus，禁止 Repository、Mapper、DAO 使用 JdbcTemplate 等其他持久化框架；测试中仅允许用于建表、数据准备和结果断言（`JAVA-M-056`）。
+- 生成 Java 代码使用 Java 8 语法。
+- 代码注释使用中文，解释关键业务与边界处理。
+- **每次改 Java 代码都必须检查 `JAVA-S-030`**：新增或改动的构造器、工厂、业务方法、测试辅助方法，形参个数均不得超过 6 个（见下文专节）。
+
+## JAVA-S-030 [强制] 单个方法参数不允许超过 6 个
+
+- **升格说明**：目录原文 `coding_agent_java_rules.md` 将本条标为建议；**本仓库升格为强制，优先级等同 `JAVA-M-*`，禁止以“建议项可偏离”绕过。**
+- **适用范围（全部计入）**：实例方法、静态方法、构造器、工厂方法（`create`/`of`/`valueOf` 等）、函数式接口抽象方法、Jackson `@JsonCreator`、测试类与测试辅助方法。`<= 6` 合法，`>= 7` 一律违规。
+- **不豁免**：Spring 构造器注入、Lombok `@RequiredArgsConstructor` 生成的全参构造、多参 `@JsonCreator`、测试 fixture 摊平参数。
+- **合法写法（按优先级）**：
+  1. 参数对象 / Command / Query，且用 **Builder** 构造（本仓库已有范例：`AcceptPvJobCommand`、`SnapshotDescriptorCommand`、`BatchPersistence`、`TaskPack`、`BatchTriggerExecutor.TriggerRequest`）。
+  2. **Spring Bean 构造器将超 6 个依赖时**：核心领域协作对象留在构造器；端口 / Assembler / `IdGenerator` 等技术协作点用字段 `@Autowired`。须在类注释与 `Deviations` 写明偏离 `FW-03`。单测用 `ReflectionTestUtils.setField` 补注入（见 `BatchTriggerAppService`）。
+  3. 按 SRP 拆类，而不是继续往同一个方法加参。不要为消参再拆一层 Support 嵌套类型。
+- **禁止用来“消参”的写法**：`Map`/`JSONObject` 当袋子（违反 `AC-05`）、把多个无关参数塞进 `remark`（违反 `GD-01`）。
+- **Builder 构造器只收 `Builder` 一个参数**，不算超限；Builder 的链式 setter 每次只收 1 个业务字段。
+- **Jackson 载荷**：禁止 7+ 参 `@JsonCreator`。应使用 `@JsonDeserialize(builder = Xxx.Builder.class)` + `@JsonPOJOBuilder(withPrefix = "")`，或 `@JsonUnwrapped` 组合对象，**不得改变对外 JSON 字段名**。
+- **每次改代码自检动作**：
+  1. 列出本次新增/改动的方法与构造器，数形参（泛型逗号不算参数）。
+  2. 若将达到 6 个，优先先抽参数对象，不要先写满 6 再补第 7 个。
+  3. `Applied Rules` 必须写上 `JAVA-S-030`；`Self-Check` 必须逐条确认本次改动的方法均 `<= 6`。
+
+## 每次实现输出格式（必须）
+- `Applied Rules`：列出本次命中的规则 ID（至少包含关键 `JAVA-M-*`；凡改动方法签名/构造器必须包含 `JAVA-S-030`）。
+- `Implementation Notes`：说明实现如何满足规则。
+- `Deviations`：如偏离建议项，写明原因与补偿措施；无偏离写“无”。**不得偏离 `JAVA-S-030`。**
+- `Self-Check`：提交前逐条确认命中的强制项均满足，并确认本次所有方法/构造器参数个数 `<= 6`。
+
+## 代码格式规范（强制）
+- **大括号风格**：统一使用 K&R 风格 + 强制多行展开。
+  - 左大括号 `{` 跟在声明行末尾，不另起一行。
+  - 左大括号后必须换行，方法体第一行从下一行开始。
+  - 右大括号 `}` 前必须换行，禁止将方法体压缩在右大括号同一行。
+  - **禁止单行方法体**（Single-line Method），包括 getter/setter/Builder 链式方法。
+- 正确示例：
+  ```java
+  public String batchId() {
+      return batchId;
+  }
+  ```
+- 错误示例（禁止）：
+  ```java
+  public String batchId() { return batchId; }
+  ```
+
+## 高风险场景最小检查清单
+- 比较与数值：包装类型用 `equals`，`BigDecimal` 用 `compareTo`，禁止 `new BigDecimal(double)`。
+- 空值与集合：防 NPE，`toMap` 处理重复键/空值，`addAll` 前判空。
+- 并发与锁：统一加锁顺序，`ThreadLocal` 使用后清理，线程池参数显式可控。
+- 事务与异常：`@Transactional` 仅用于合适的 `public` 方法，异常处理后确保回滚语义正确。
+- 安全与日志：外部输入先校验后使用，日志脱敏且禁止直接记录未清洗外部数据。
+- 方法签名：构造器 / 工厂 / 业务方法 / 测试辅助方法参数个数 `<= 6`（`JAVA-S-030`，强制）。
+
+## 参考来源
+- 规范原文：`coding_agent_java_rules.md`

@@ -1,0 +1,227 @@
+{
+  "parseMode": "TASK",
+  "resetBeforeInit": true,
+  "buildRecipe": {
+    "buildRecipes": [
+      {
+        "curveName": "CNY FR007",
+        "currency": "CNY",
+        "createMethod": "BOOTSTRAP",
+        "dayCountConvention": "ACT/365"
+      }
+    ]
+  },
+  "calendar": {
+    "calendars": [
+      {
+        "center": "BEJ",
+        "holidays": ["2026-01-01", "2026-02-17", "2026-02-18"],
+        "busDays": ["2026-02-14"]
+      },
+      {
+        "center": "NYC",
+        "holidays": ["2026-01-01", "2026-02-17", "2026-02-18"],
+        "busDays": []
+      }
+    ]
+  },
+  "conventions": {
+    "Cash Deposit": [
+      {
+        "conventionName": "CNY-CASH-DEPOSIT",
+        "center": "BEJ",
+        "description": "Cash Deposit",
+        "attributes": {
+          "SettlementOffset": "1B",
+          "SettlementHolidays": "BEJ",
+          "Currency": "CNY",
+          "Notional": "10000000",
+          "AccrualBasis": "Act/365",
+          "PaymentBusinessDayConvention": "MF",
+          "PaymentHolidays": "BEJ",
+          "TermOverride": "",
+          "Type": "Cash Deposit"
+        }
+      }
+    ],
+    "Swap": [
+      {
+        "conventionName": "CNY-SWAP-QTR-MONEY",
+        "center": "BEJ",
+        "description": "Swap",
+        "attributes": {
+          "SettlementOffset": "1B",
+          "SettlementHolidays": "BEJ",
+          "Currency": "CNY",
+          "Notional": "10000000",
+          "LiborIndex": "CNY-SHIBOR-3M",
+          "AccrualPeriod": "3M",
+          "AccrualBasis": "Act/365F",
+          "PaymentBusinessDayConvention": "MF",
+          "PaymentHolidays": "BEJ",
+          "Type": "Swap"
+        }
+      }
+    ]
+  },
+  "payload": {
+    "schema_version": "1.0",
+    "task_id": "CNY FR007",
+    "task_type": "BUILD_MODELS",
+    "valuation_date": "2025-12-31",
+    "snapshots": {
+      "static_snapshot_id": "STATIC-20251331-v1",
+      "market_snapshot_id": "MKT-20251231-v2232"
+    },
+    "market_input": {
+      "market_data_set": {
+        "market_quote": [
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Cash Deposit",
+            "instrumentName": "CNY-CASH-DEPOSIT",
+            "tenor": "O/N",
+            "quote": 0.013139,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Cash Deposit",
+            "instrumentName": "CNY-CASH-DEPOSIT",
+            "tenor": "1W",
+            "quote": 0.022,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Cash Deposit",
+            "instrumentName": "CNY-CASH-DEPOSIT",
+            "tenor": "2W",
+            "quote": 0.019,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "1M",
+            "quote": 0.0165125,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "3M",
+            "quote": 0.0157625,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "6M",
+            "quote": 0.01525,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "9M",
+            "quote": 0.015021,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "1Y",
+            "quote": 0.014985,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "2Y",
+            "quote": 0.0151375,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "3Y",
+            "quote": 0.0154195,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "4Y",
+            "quote": 0.0157505,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "5Y",
+            "quote": 0.0161165,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "7Y",
+            "quote": 0.016872,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "10Y",
+            "quote": 0.017933,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "20Y",
+            "quote": 0.01775,
+            "strike": ""
+          },
+          {
+            "curveName": "CNY FR007",
+            "pair": "",
+            "instrumentType": "Swap",
+            "instrumentName": "CNY-SWAP-QTR-MONEY",
+            "tenor": "30Y",
+            "quote": 0.0172,
+            "strike": ""
+          }
+        ]
+      }
+    }
+  }
+}

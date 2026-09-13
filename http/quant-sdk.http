@@ -1,0 +1,59 @@
+### 健康检查 / 会话状态
+GET http://localhost:8080/api/quant/health
+
+### 当前 jar 实际能力（对照接口文档）
+GET http://localhost:8080/api/quant/capabilities
+
+### 查询 init 状态
+GET http://localhost:8080/api/quant/init/status
+
+### 列出内置样例
+GET http://localhost:8080/api/quant/samples
+
+### 读取 CNY FR007 任务样例
+GET http://localhost:8080/api/quant/samples/task-cny-fr007
+
+### 仅解析任务 JSON，不执行计算
+POST http://localhost:8080/api/quant/workflow/parse?mode=TASK
+Content-Type: application/json
+
+< ../src/main/resources/samples/task-cny-fr007.json
+
+### 装载曲线配方
+POST http://localhost:8080/api/quant/init/build-recipe
+Content-Type: application/json
+
+< ../src/main/resources/samples/init-build-recipe.json
+
+### 装载日历
+POST http://localhost:8080/api/quant/init/calendar
+Content-Type: application/json
+
+< ../src/main/resources/samples/init-calendar.json
+
+### 装载惯例
+POST http://localhost:8080/api/quant/init/conventions
+Content-Type: application/json
+
+< ../src/main/resources/samples/init-conventions.json
+
+### 封板 init，此后才能 run
+POST http://localhost:8080/api/quant/init/finished
+
+### 执行 flat 单任务
+POST http://localhost:8080/api/quant/run/task
+Content-Type: application/json
+
+< ../src/main/resources/samples/task-cny-fr007.json
+
+### 重置 init（需要重新装载配置时）
+POST http://localhost:8080/api/quant/init/reset
+
+### 一次性 init + run（推荐联调入口）
+POST http://localhost:8080/api/quant/run/oneshot
+Content-Type: application/json
+
+< ../src/main/resources/samples/oneshot-cny-fr007.json
+
+### 使用服务内置样例一键跑通
+POST http://localhost:8080/api/quant/run/oneshot/sample/cny-fr007

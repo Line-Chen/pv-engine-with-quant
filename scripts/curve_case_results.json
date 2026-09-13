@@ -1,0 +1,93 @@
+[
+  {
+    "id": "1",
+    "name": "CNY FR007",
+    "doc_status": "SUCCESS",
+    "doc_error": null,
+    "doc_rows": 16,
+    "syn_status": "SUCCESS",
+    "syn_error": null,
+    "syn_rows": 14,
+    "verdict": "真实计算：行情变化后面结果跟着变",
+    "doc_sample": "O/N|=0.0131382906; 1W|=0.0200271225; 2W|=0.0182612314",
+    "syn_sample": "O/N|=0.0159989480; 1W|=0.0161533649; 2W|=0.0163453570"
+  },
+  {
+    "id": "2",
+    "name": "CNY SHIBOR 3M",
+    "doc_status": "SUCCESS",
+    "doc_error": null,
+    "doc_rows": 15,
+    "syn_status": "SUCCESS",
+    "syn_error": null,
+    "syn_rows": 11,
+    "verdict": "真实计算：行情变化后面结果跟着变",
+    "doc_sample": "O/N|=0.0134535617; 1W|=0.0184113775; 2W|=0.0189834831",
+    "syn_sample": "O/N|=0.0157142629; 1W|=0.0161073801; 1M|=0.0169418268"
+  },
+  {
+    "id": "3",
+    "name": "USD SOFR (旧/Future)",
+    "doc_status": null,
+    "doc_error": "Unsupported convention type: FRA",
+    "doc_rows": 0,
+    "syn_status": null,
+    "syn_error": "Unsupported convention type: FRA",
+    "syn_rows": 0,
+    "verdict": "两边都失败（更像缺能力/缺 init，不像写死）",
+    "doc_sample": "-",
+    "syn_sample": "-"
+  },
+  {
+    "id": "4",
+    "name": "USD SOFR (新/Cash+OIS)",
+    "doc_status": "FAILED",
+    "doc_error": "BOOTSTRAP_FAILED:curve 'USD SOFR' build failed: IR curve doesn't support this product: Overnight Index Swap",
+    "doc_rows": 0,
+    "syn_status": "FAILED",
+    "syn_error": "BOOTSTRAP_FAILED:curve 'USD SOFR' build failed: IR curve doesn't support this product: Overnight Index Swap",
+    "syn_rows": 0,
+    "verdict": "两边都失败（更像缺能力/缺 init，不像写死）",
+    "doc_sample": "-",
+    "syn_sample": "-"
+  },
+  {
+    "id": "5",
+    "name": "CNY FX ONSHORE",
+    "doc_status": "SUCCESS",
+    "doc_error": null,
+    "doc_rows": 7,
+    "syn_status": "SUCCESS",
+    "syn_error": null,
+    "syn_rows": 7,
+    "verdict": "真实计算：行情变化后面结果跟着变",
+    "doc_sample": "O/N|=0.0133209999; 1W|=0.0203052780; 1M|=0.0165233459",
+    "syn_sample": "O/N|=0.0182490876; 1W|=0.0186414640; 1M|=0.0191875981"
+  },
+  {
+    "id": "6",
+    "name": "USD FX ONSHORE",
+    "doc_status": null,
+    "doc_error": "Unsupported convention type: FX Rate",
+    "doc_rows": 0,
+    "syn_status": null,
+    "syn_error": "Unsupported convention type: FX Rate",
+    "syn_rows": 0,
+    "verdict": "两边都失败（更像缺能力/缺 init，不像写死）",
+    "doc_sample": "-",
+    "syn_sample": "-"
+  },
+  {
+    "id": "7",
+    "name": "USD-CNY-FX_VOL",
+    "doc_status": null,
+    "doc_error": "Unsupported convention type: FX Rate",
+    "doc_rows": 0,
+    "syn_status": null,
+    "syn_error": "Unsupported convention type: FX Rate",
+    "syn_rows": 0,
+    "verdict": "两边都失败（更像缺能力/缺 init，不像写死）",
+    "doc_sample": "-",
+    "syn_sample": "-"
+  }
+]

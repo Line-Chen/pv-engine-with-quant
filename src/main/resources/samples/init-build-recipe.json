@@ -1,0 +1,10 @@
+{
+  "buildRecipes": [
+    {
+      "curveName": "CNY FR007",
+      "currency": "CNY",
+      "createMethod": "BOOTSTRAP",
+      "dayCountConvention": "ACT/365"
+    }
+  ]
+}
